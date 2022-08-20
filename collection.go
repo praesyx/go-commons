@@ -121,7 +121,7 @@ func (c *Collection) notEmptySlice() error {
 //	})
 //	fmt.Println(c.Last())
 //}
-func Filter(objects any, filter func(any) bool) (Collection, error) {
+func Filter(objects any, filter func(T any) bool) (Collection, error) {
 	var collection Collection
 	if reflect.TypeOf(objects).Kind() != reflect.Slice {
 		return collection, errors.New("interface type is not slice")
