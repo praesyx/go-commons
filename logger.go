@@ -26,7 +26,7 @@ func GetLoggerBuilder() *LoggerBuilder {
 	return loggerBuilder
 }
 
-func (l *LoggerBuilder) Code(errorCode uint16) int {
+func (l *LoggerBuilder) Code(errorCode uint32) int {
 	n, _ := strconv.Atoi(fmt.Sprintf("%d%d", l.serviceCode, errorCode))
 	return n
 }
