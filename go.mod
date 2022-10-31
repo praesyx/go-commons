@@ -1,4 +1,4 @@
-module bitbucket.org/crgrtm/go-commons
+module github.com/praesyx/go-commons
 
 go 1.18
 
