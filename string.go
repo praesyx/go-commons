@@ -2,7 +2,7 @@ package commons
 
 import "unicode"
 
-func TripByLen(str string, max int) string {
+func TruncateByLen(str string, max int) string {
 	lastSpaceIx := -1
 	n := 0
 	for i, r := range str {
