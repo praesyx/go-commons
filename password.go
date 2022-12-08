@@ -6,6 +6,7 @@ import (
 	"errors"
 	"fmt"
 	"golang.org/x/crypto/argon2"
+	"golang.org/x/crypto/bcrypt"
 	"math/rand"
 	"strings"
 	"time"
@@ -63,6 +64,16 @@ func generatePassword(passwordLength, minSpecialChar, minNum, minUpperCase int) 
 		inRune[i], inRune[j] = inRune[j], inRune[i]
 	})
 	return string(inRune)
+}
+
+func BcryptGeneratePassword(password string, cost int) string {
+	bPwd, _ := bcrypt.GenerateFromPassword([]byte(password), cost)
+
+	return string(bPwd)
+}
+
+func BcryptComparePassword(hash, pwd string) error {
+	return bcrypt.CompareHashAndPassword([]byte(hash), []byte(pwd))
 }
 
 func Argon2GenerateFromPassword(password string, p *params) (encodedHash string, err error) {
