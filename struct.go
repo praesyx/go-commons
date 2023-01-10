@@ -12,7 +12,7 @@ func StructFieldHasEmptyValue(itr interface{}) (exists bool, name string) {
 	case reflect.Struct:
 		for n := 0; n < val.NumField(); n++ {
 			v := val.Field(n)
-			if isZeroValue(v) {
+			if IsZeroValue(v) {
 				exists = true
 				name = val.Type().Field(n).Name
 				return
@@ -22,20 +22,20 @@ func StructFieldHasEmptyValue(itr interface{}) (exists bool, name string) {
 	return
 }
 
-func isZeroValue(v reflect.Value) bool {
+func IsZeroValue(v reflect.Value) bool {
 	switch v.Kind() {
 	case reflect.Func, reflect.Map, reflect.Slice:
 		return v.IsNil()
 	case reflect.Array:
 		z := true
 		for i := 0; i < v.Len(); i++ {
-			z = z && isZeroValue(v.Index(i))
+			z = z && IsZeroValue(v.Index(i))
 		}
 		return z
 	case reflect.Struct:
 		z := true
 		for i := 0; i < v.NumField(); i++ {
-			z = z && isZeroValue(v.Field(i))
+			z = z && IsZeroValue(v.Field(i))
 		}
 		return z
 	}
