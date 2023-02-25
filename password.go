@@ -30,10 +30,10 @@ type params struct {
 
 func GenerateRandomPassword(length int) string {
 	rand.Seed(time.Now().Unix())
-	return generatePassword(length, 1, 1, 2)
+	return GeneratePassword(length, 1, 1, 2)
 }
 
-func generatePassword(passwordLength, minSpecialChar, minNum, minUpperCase int) string {
+func GeneratePassword(passwordLength, minSpecialChar, minNum, minUpperCase int) string {
 	var password strings.Builder
 
 	//Set special character
