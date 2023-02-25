@@ -13,8 +13,8 @@ import (
 )
 
 var (
-	lowerCharSet   = "abcdedfghijklmnopqrst"
-	upperCharSet   = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+	lowerCharSet   = "abcdedfghjkmnpqrst"
+	upperCharSet   = "ABCDEFGHJKMNPQRSTUVWXYZ"
 	specialCharSet = "!_-"
 	numberSet      = "0123456789"
 	allCharSet     = lowerCharSet + upperCharSet + specialCharSet + numberSet
