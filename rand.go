@@ -16,6 +16,6 @@ func RandomIntFromRange(min, max int) int {
 	if n < 0 {
 		n = 0
 	}
-	rand.Seed(time.Now().UnixNano())
-	return rand.Intn(n) + min
+	r := rand.New(rand.NewSource(time.Now().UnixNano()))
+	return r.Intn(n) + min
 }

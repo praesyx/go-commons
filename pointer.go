@@ -45,3 +45,7 @@ func Uint64(n uint64) *uint64 {
 func Time(t time.Time) *time.Time {
 	return &t
 }
+
+func Ptr[T any](v T) *T {
+	return &v
+}
