@@ -1,17 +1,20 @@
 package commons
 
 import (
+	"cmp"
 	"reflect"
 	"strings"
 )
 
 // InArrayByField проверка, присутствует значение в интерфейсе по полю
 // Пример:
-// type A struct {
-//	R struct {
-//		Val []string
+//
+//	type A struct {
+//		R struct {
+//			Val []string
+//		}
 //	}
-//}
+//
 // a := A{R: struct{Val []string}{Val: []string{"ROLE"}}}
 // if ok, i := utils.InArrayByField("ROLE", &a.R, "val"); ok { fmt.Println("OK", i) }
 func InArrayByField(needle interface{}, itr interface{}, field string) (exists bool, index int) {
@@ -66,27 +69,13 @@ func InArrayByField(needle interface{}, itr interface{}, field string) (exists b
 
 // InArray проверка, присутствует значение в срезе или массиве.
 // Пример:
-// if ok := InArray(3, uint8{1,2,3}); ok { fmt.Println("OK") }
-func InArray(val interface{}, array interface{}) (exists bool) {
-	exists = false
-	switch reflect.TypeOf(array).Kind() {
-	case reflect.Ptr:
-		v := reflect.Indirect(reflect.ValueOf(array).Elem())
-		for i := 0; i < v.Len(); i++ {
-			if ok := reflect.DeepEqual(val, v.Index(i).Interface()); ok {
-				exists = ok
-				return
-			}
-		}
-	case reflect.Slice, reflect.Array:
-		s := reflect.ValueOf(array)
-		for i := 0; i < s.Len(); i++ {
-			if ok := reflect.DeepEqual(val, s.Index(i).Interface()); ok {
-				exists = ok
-				return
-			}
+// if index := InArray(3, uint8{1,2,3}); index != -1 { fmt.Println("OK") }
+func InArray[S ~[]E, E cmp.Ordered](val E, array S) int {
+	for i, v := range array {
+		if v == val {
+			return i
 		}
 	}
 
-	return
+	return -1
 }
