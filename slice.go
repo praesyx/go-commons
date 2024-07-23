@@ -6,6 +6,8 @@ import (
 	"strings"
 )
 
+const NilPosition = -1
+
 // InArrayByField проверка, присутствует значение в интерфейсе по полю
 // Пример:
 //
@@ -69,7 +71,7 @@ func InArrayByField(needle interface{}, itr interface{}, field string) (exists b
 
 // InArray проверка, присутствует значение в срезе или массиве.
 // Пример:
-// if index := InArray(3, uint8{1,2,3}); index != -1 { fmt.Println("OK") }
+// if index := InArray(3, []uint8{1,2,3}); index != NilPosition { fmt.Println("OK") }
 func InArray[S ~[]E, E cmp.Ordered](val E, array S) int {
 	for i, v := range array {
 		if v == val {
@@ -77,5 +79,5 @@ func InArray[S ~[]E, E cmp.Ordered](val E, array S) int {
 		}
 	}
 
-	return -1
+	return NilPosition
 }
